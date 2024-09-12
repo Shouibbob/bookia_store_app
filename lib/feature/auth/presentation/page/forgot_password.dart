@@ -3,37 +3,38 @@ import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
 import 'package:bookia_store_app/core/widgets/text_form_field_widget.dart';
-import 'package:bookia_store_app/feature/auth/view/otp_verification.dart';
-import 'package:bookia_store_app/feature/auth/view/password_changed.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/login_view.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/otp_verification.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-class ResetPasswordView extends StatefulWidget {
-  const ResetPasswordView({super.key});
+class ForgotPasswordView extends StatefulWidget {
+  const ForgotPasswordView({super.key});
 
   @override
-  State<ResetPasswordView> createState() => _ResetPasswordViewState();
+  State<ForgotPasswordView> createState() => _ForgotPasswordViewState();
 }
 
-class _ResetPasswordViewState extends State<ResetPasswordView> {
+class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             GestureDetector(
-              onTap: () =>
-                  pushReplacement(context, const OtpVerificationView()),
+              onTap: () => pushReplacement(context, const LoginView()),
               child: Container(
                 width: 41,
                 height: 41,
-                margin: const EdgeInsets.only(top: 10),
+                //margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.only(right: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: AppColors.background,
+                  color: AppColors.whiteColor,
                   border: Border.all(
                     color: AppColors.borderColor,
                   ),
@@ -50,32 +51,39 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Create new password',
-              style: getTitleTextStyle(),
+              'Forgot Password?',
+              style: getHeadLineTextStyle(context),
             ),
             const Gap(10),
             Text(
-              'Your new password must be unique from those previously used.',
-              style: getBodyTextStyle(),
+              'Don\'t worry! It occurs. Please enter the email address linked with your account',
+              style: getSmallTextStyle(
+                context,
+                color: AppColors.greyColor,
+              ),
             ),
             const Gap(32),
             const TextFormFieldWidget(
-              hintText: 'New Password',
-            ),
-            const Gap(15),
-            const TextFormFieldWidget(
-              hintText: 'Confirm Password',
+              hintText: 'Enter your email',
             ),
             const Gap(30),
             CustomButton(
-              text: 'Reset Password',
+              text: 'Send Code',
               onPressed: () {
-                pushReplacement(context, const PasswordChangedView());
+                pushReplacement(context, const OtpVerificationView());
               },
               width: double.infinity,
             ),
+            const Gap(54),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomInfo(
+        text: 'Remember password?',
+        textButton: 'Login',
+        onpressed: () {
+          pushReplacement(context, const LoginView());
+        },
       ),
     );
   }

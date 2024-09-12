@@ -1,15 +1,17 @@
+import 'package:bookia_store_app/core/constants/assets_icons.dart';
 import 'package:bookia_store_app/core/function/navigation.dart';
 import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
-import 'package:bookia_store_app/feature/Welcom/welcom_view.dart';
-import 'package:bookia_store_app/feature/auth/view/register_view.dart';
-import 'package:bookia_store_app/feature/auth/widgets/bottom_info.dart';
-import 'package:bookia_store_app/feature/auth/widgets/sign_apps_widget.dart';
+import 'package:bookia_store_app/core/widgets/nav_bar_widget.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/register_view.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/social_btn_card.dart';
 import 'package:bookia_store_app/core/widgets/text_form_field_widget.dart';
-import 'package:bookia_store_app/feature/auth/view/forgot_password.dart';
-import 'package:bookia_store_app/feature/auth/widgets/divider_widget.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/forgot_password.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/divider_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class LoginView extends StatefulWidget {
@@ -20,24 +22,25 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool isObscure = true;
+  bool isObscure = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             GestureDetector(
-              onTap: () => pushReplacement(context, const WelcomeView()),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 41,
                 height: 41,
-                margin: const EdgeInsets.only(top: 10),
+                //margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.only(right: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: AppColors.background,
+                  color: AppColors.whiteColor,
                   border: Border.all(
                     color: AppColors.borderColor,
                   ),
@@ -49,30 +52,33 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(22, 30, 22, 0),
+        padding: const EdgeInsets.all(22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Welcome back!Glad\nto see you, Again!',
-              style: getTitleTextStyle(),
+              'Welcome back! Glad to see you, Again!',
+              style: getHeadLineTextStyle(context),
             ),
             const Gap(32),
             const TextFormFieldWidget(),
             const Gap(15),
             TextFormFieldWidget(
+              obscureText: isObscure,
               hintText: 'Enter your password',
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscure = !isObscure;
-                    });
-                  },
-                  icon: Icon(
-                    isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.remove_red_eye_outlined,
-                  )),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                    child: SvgPicture.asset(AssetsIcons.eyeSvg),
+                  ),
+                ],
+              ),
             ),
             const Gap(5),
             Row(
@@ -80,11 +86,11 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 InkWell(
                   onTap: () {
-                    pushReplacement(context, const ForfotPasswordView());
+                    pushReplacement(context, const ForgotPasswordView());
                   },
                   child: Text(
                     'Forgot Password?',
-                    style: getBodyTextStyle(),
+                    style: getSmallTextStyle(context),
                   ),
                 ),
               ],
@@ -92,21 +98,24 @@ class _LoginViewState extends State<LoginView> {
             const Gap(30),
             CustomButton(
               text: 'Login',
-              onPressed: () {},
-              width: double.infinity,
+              onPressed: () {
+                pushAndRemoveUntil(context, const NavBarWidget());
+              },
             ),
-            const Gap(34),
-            const DividerView(),
-            const Gap(21),
-            const SignApps(),
+            const Gap(30),
+            const DividerView(
+              text: 'Or Login with',
+            ),
+            const Gap(20),
+            const SocialButtonsCard(),
           ],
         ),
       ),
       bottomNavigationBar: BottomInfo(
         text: 'Don’t have an account?',
-        textButton: 'Register Now',
+        textButton: 'Sign Up',
         onpressed: () {
-          pushReplacement(context, const RegisterView());
+          push(context, const RegisterView());
         },
       ),
     );

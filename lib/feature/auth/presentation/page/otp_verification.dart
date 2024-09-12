@@ -2,10 +2,9 @@ import 'package:bookia_store_app/core/function/navigation.dart';
 import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
-import 'package:bookia_store_app/feature/auth/view/forgot_password.dart';
-import 'package:bookia_store_app/feature/auth/view/login_view.dart';
-import 'package:bookia_store_app/feature/auth/view/reset_password.dart';
-import 'package:bookia_store_app/feature/auth/widgets/bottom_info.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/login_view.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/reset_password.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:pinput/pinput.dart';
@@ -23,18 +22,19 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             GestureDetector(
-              onTap: () => pushReplacement(context, const ForfotPasswordView()),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 41,
                 height: 41,
-                margin: const EdgeInsets.only(top: 10),
+                //margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.only(right: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: AppColors.background,
+                  color: AppColors.whiteColor,
                   border: Border.all(
                     color: AppColors.borderColor,
                   ),
@@ -52,12 +52,15 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
           children: [
             Text(
               'OTP Verification',
-              style: getTitleTextStyle(),
+              style: getHeadLineTextStyle(context),
             ),
             const Gap(10),
             Text(
               'Enter the verification code we just sent on\nyour email address.',
-              style: getBodyTextStyle(),
+              style: getSmallTextStyle(
+                context,
+                color: AppColors.greyColor,
+              ),
             ),
             const Gap(32),
             Center(
@@ -97,7 +100,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                             margin: const EdgeInsets.only(bottom: 9),
                             width: 22,
                             height: 1,
-                            color: AppColors.primary,
+                            color: AppColors.primaryColor,
                           ),
                         ],
                       ),
@@ -106,11 +109,11 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                         height: 60,
                         textStyle: const TextStyle(
                           fontSize: 22,
-                          color: const Color.fromRGBO(30, 60, 87, 1),
+                          color: Color.fromRGBO(30, 60, 87, 1),
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.primary),
+                          border: Border.all(color: AppColors.primaryColor),
                         ),
                       ),
                       submittedPinTheme: PinTheme(
@@ -122,7 +125,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.primary),
+                          border: Border.all(color: AppColors.primaryColor),
                         ),
                       ),
                       errorPinTheme: PinTheme(
@@ -157,9 +160,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
       bottomNavigationBar: BottomInfo(
         text: 'Didn’t received code?',
         textButton: 'Resend',
-        onpressed: () {
-          pushReplacement(context, const LoginView());
-        },
+        onpressed: () {},
       ),
     );
   }

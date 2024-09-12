@@ -1,5 +1,5 @@
 import 'package:bookia_store_app/core/utils/themes.dart';
-import 'package:bookia_store_app/feature/Welcom/welcom_view.dart';
+import 'package:bookia_store_app/feature/intro/splash_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const WelcomeView(),
+      home: const SplashView(),
     );
   }
 }

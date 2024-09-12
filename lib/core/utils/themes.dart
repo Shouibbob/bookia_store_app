@@ -3,12 +3,33 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.background,
-    appBarTheme: const AppBarTheme(backgroundColor: AppColors.background),
+    fontFamily: 'DMSerifDisplay',
+    scaffoldBackgroundColor: AppColors.whiteColor,
+    appBarTheme: const AppBarTheme(
+        backgroundColor: AppColors.whiteColor,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textColor,
+        )),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.whiteColor,
+      elevation: 0,
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: AppColors.textColor,
+    ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.primaryColor,
+      onSurface: AppColors.textColor,
+    ),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(
         fontFamily: 'DMSerifDisplay',
-        color: AppColors.hintColor,
+        color: AppColors.greyColor,
         fontSize: 15,
         fontWeight: FontWeight.w400,
       ),
@@ -22,7 +43,7 @@ class AppTheme {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         borderSide: BorderSide(
-          color: AppColors.borderColor,
+          color: AppColors.primaryColor,
           width: 1,
         ),
       ),

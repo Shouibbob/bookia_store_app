@@ -17,21 +17,19 @@ class BottomInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 26),
+      padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             text,
-            style: getSmallTextStyle(),
+            style: getSmallTextStyle(context),
           ),
           TextButton(
             onPressed: onpressed,
             child: Text(
               textButton,
-              style: getSmallTextStyle(
-                color: AppColors.primary,
-              ),
+              style: getSmallTextStyle(context, color: AppColors.primaryColor),
             ),
           ),
         ],

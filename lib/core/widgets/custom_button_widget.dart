@@ -1,50 +1,49 @@
 import 'package:bookia_store_app/core/utils/colors.dart';
+import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {super.key,
-      this.borderRadius,
-      this.height,
-      this.width,
-      this.color = AppColors.primary,
-      this.textColor = AppColors.background,
-      this.isChanged = false,
+      this.borderRadius = 8,
+      this.height = 50,
+      this.width = double.infinity,
+      this.color = AppColors.primaryColor,
+      this.textStyle,
+      this.isOutline = false,
       required this.text,
       required this.onPressed});
-
-  final double? height;
-  final double? width;
+  final TextStyle? textStyle;
+  final double height;
+  final double width;
   final String text;
   final Color color;
-  final Color textColor;
-  final double? borderRadius;
+  final double borderRadius;
   final Function() onPressed;
-  final bool isChanged;
+  final bool isOutline;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: width ?? 331,
-        height: height ?? 56,
+        width: width,
+        height: height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: color,
+            backgroundColor: isOutline ? AppColors.whiteColor : color,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 8),
-              side: isChanged
-                  ? BorderSide(color: AppColors.blackColor)
-                  : BorderSide(color: AppColors.primary),
+              borderRadius: BorderRadius.circular(borderRadius),
+              side: isOutline
+                  ? const BorderSide(color: AppColors.textColor)
+                  : BorderSide.none,
             ),
           ),
           onPressed: onPressed,
           child: Text(
             text,
-            style: TextStyle(
-              fontFamily: 'DMSerifDisplay',
-              color: textColor,
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
-            ),
+            style: textStyle ??
+                getBodyTextStyle(
+                  context,
+                  color: isOutline ? AppColors.textColor : AppColors.whiteColor,
+                ),
           ),
         ));
   }

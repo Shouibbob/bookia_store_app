@@ -1,13 +1,16 @@
+import 'package:bookia_store_app/core/constants/assets_icons.dart';
 import 'package:bookia_store_app/core/function/navigation.dart';
 import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
-import 'package:bookia_store_app/feature/auth/widgets/bottom_info.dart';
-import 'package:bookia_store_app/feature/auth/widgets/sign_apps_widget.dart';
+import 'package:bookia_store_app/core/widgets/nav_bar_widget.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/login_view.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/social_btn_card.dart';
 import 'package:bookia_store_app/core/widgets/text_form_field_widget.dart';
-import 'package:bookia_store_app/feature/auth/view/login_view.dart';
-import 'package:bookia_store_app/feature/auth/widgets/divider_widget.dart';
+import 'package:bookia_store_app/feature/auth/presentation/widgets/divider_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class RegisterView extends StatefulWidget {
@@ -18,25 +21,26 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  bool isObscure = true;
-  bool isObscureConfirm = true;
+  bool isObscure = false;
+  bool isObscureConfirm = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             GestureDetector(
-              onTap: () => pushReplacement(context, const LoginView()),
+              onTap: () => Navigator.pop(context),
               child: Container(
                 width: 41,
                 height: 41,
-                margin: const EdgeInsets.only(top: 10),
+                //margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.only(right: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: AppColors.background,
+                  color: AppColors.whiteColor,
                   border: Border.all(
                     color: AppColors.borderColor,
                   ),
@@ -48,17 +52,17 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(22, 30, 22, 0),
+        padding: const EdgeInsets.all(22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello! Register to get\nstarted',
-              style: getTitleTextStyle(),
+              'Hello! Register to get started',
+              style: getHeadLineTextStyle(context),
             ),
             const Gap(32),
             const TextFormFieldWidget(
-              hintText: 'User Name',
+              hintText: 'Username',
             ),
             const Gap(15),
             const TextFormFieldWidget(
@@ -66,57 +70,60 @@ class _RegisterViewState extends State<RegisterView> {
             ),
             const Gap(15),
             TextFormFieldWidget(
+              obscureText: isObscure,
               hintText: 'Password',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscure = !isObscure;
-                  });
-                },
-                icon: Icon(
-                  isObscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined,
-                ),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                    child: SvgPicture.asset(AssetsIcons.eyeSvg),
+                  ),
+                ],
               ),
             ),
             const Gap(15),
             TextFormFieldWidget(
+              obscureText: isObscure,
               hintText: 'Confirm Password',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscureConfirm = !isObscureConfirm;
-                  });
-                },
-                icon: Icon(
-                  isObscureConfirm
-                      ? Icons.visibility_off_outlined
-                      : Icons.remove_red_eye_outlined,
-                ),
+              suffixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isObscureConfirm = !isObscureConfirm;
+                      });
+                    },
+                    child: SvgPicture.asset(AssetsIcons.eyeSvg),
+                  ),
+                ],
               ),
             ),
             const Gap(30),
             CustomButton(
               text: 'Register',
-              onPressed: () {},
-              width: double.infinity,
+              onPressed: () {
+                pushAndRemoveUntil(context, const NavBarWidget());
+              },
             ),
-            const Gap(34),
+            const Gap(30),
             const DividerView(
               text: 'Or Register with',
             ),
-            const Gap(21),
-            const SignApps(),
+            const Gap(20),
+            const SocialButtonsCard(),
           ],
         ),
       ),
       bottomNavigationBar: BottomInfo(
-        text: 'Already have an account?',
+        text: 'Already have an account? ',
         textButton: 'Login Now',
-        onpressed: () {
-          pushReplacement(context, const LoginView());
-        },
+        onpressed: () => pushReplacement(context, const LoginView()),
       ),
     );
   }

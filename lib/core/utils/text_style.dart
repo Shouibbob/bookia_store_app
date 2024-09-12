@@ -1,29 +1,53 @@
-import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-TextStyle getTitleTextStyle(
-    {double? fontSize, Color? color, FontWeight? fontWeight}) {
+TextStyle getHeadLineTextStyle(BuildContext context,
+    {double fontSize = 30,
+    Color? color,
+    fontWeight = FontWeight.normal,
+    String? fontFamily}) {
   return TextStyle(
-      fontFamily: 'DMSerifDisplay',
-      color: color ?? AppColors.blackColor,
-      fontSize: fontSize ?? 30,
-      fontWeight: fontWeight ?? FontWeight.w400);
+    fontFamily: fontFamily ?? 'DMSerifDisplay',
+    color: color ?? Theme.of(context).colorScheme.onSurface,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
 }
 
-TextStyle getBodyTextStyle(
-    {double? fontSize, Color? color, FontWeight? fontWeight}) {
+TextStyle getTitleTextStyle(BuildContext context,
+    {double fontSize = 24,
+    Color? color,
+    fontWeight = FontWeight.normal,
+    String? fontFamily}) {
   return TextStyle(
-      fontFamily: 'DMSerifDisplay',
-      color: color ?? AppColors.hintColor,
-      fontSize: fontSize ?? 16,
-      fontWeight: fontWeight ?? FontWeight.w400);
+    fontFamily: fontFamily ?? 'DMSerifDisplay',
+    color: color ?? Theme.of(context).colorScheme.onSurface,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
 }
 
-TextStyle getSmallTextStyle(
-    {double? fontSize, Color? color, FontWeight? fontWeight}) {
+TextStyle getBodyTextStyle(BuildContext context,
+    {double fontSize = 18,
+    Color? color,
+    fontWeight = FontWeight.normal,
+    String? fontFamily}) {
   return TextStyle(
-      fontFamily: 'DMSerifDisplay',
-      color: color ?? AppColors.blackColor,
-      fontSize: fontSize ?? 15,
-      fontWeight: fontWeight ?? FontWeight.w400);
+    fontFamily: fontFamily ?? 'DMSerifDisplay',
+    color: color ?? Theme.of(context).colorScheme.onSurface,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
+}
+
+TextStyle getSmallTextStyle(BuildContext context,
+    {double fontSize = 16,
+    Color? color,
+    fontWeight = FontWeight.normal,
+    String? fontFamily}) {
+  return TextStyle(
+    fontFamily: fontFamily ?? 'DMSerifDisplay',
+    color: color ?? Theme.of(context).colorScheme.onSurface,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
 }
