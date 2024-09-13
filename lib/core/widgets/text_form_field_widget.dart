@@ -11,6 +11,8 @@ class TextFormFieldWidget extends StatelessWidget {
     this.suffixIconConstraints,
     this.keyboardType,
     this.isNOte = false,
+    this.controller,
+    this.validator,
   });
   final double? width;
   final double? height;
@@ -20,12 +22,16 @@ class TextFormFieldWidget extends StatelessWidget {
   final BoxConstraints? suffixIconConstraints;
   final TextInputType? keyboardType;
   final bool isNOte;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: height ?? 56,
       child: TextFormField(
+        validator: validator,
+        controller: controller,
         expands: isNOte ? true : false,
         maxLines: isNOte ? null : 1,
         obscureText: obscureText,

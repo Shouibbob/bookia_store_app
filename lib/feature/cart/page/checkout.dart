@@ -24,7 +24,7 @@ class _CheckoutViewState extends State<CheckoutView> {
         toolbarHeight: 80,
         title: Padding(
           padding: const EdgeInsets.only(
-            right: 22,
+            right: 41,
           ),
           child: Row(
             children: [
