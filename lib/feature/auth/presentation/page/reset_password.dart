@@ -24,7 +24,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         title: Row(
           children: [
             GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => pushReplacement(context, const PasswordChangedView()),
               child: Container(
                 width: 41,
                 height: 41,

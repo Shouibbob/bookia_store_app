@@ -2,7 +2,7 @@ import 'package:bookia_store_app/core/constants/assets_icons.dart';
 import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/feature/cart/page/cart_view.dart';
 import 'package:bookia_store_app/feature/home/presentation/page/home_view.dart';
-import 'package:bookia_store_app/feature/profile/page/profile_view.dart';
+import 'package:bookia_store_app/feature/profile/presentation/page/profile_view.dart';
 import 'package:bookia_store_app/feature/wishlist/page/wishlist_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

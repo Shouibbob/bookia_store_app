@@ -1,14 +1,15 @@
 import 'package:bookia_store_app/core/constants/assets_icons.dart';
 import 'package:bookia_store_app/core/function/dialogs.dart';
 import 'package:bookia_store_app/core/function/navigation.dart';
-import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
+import 'package:bookia_store_app/core/widgets/back_card_widget.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
 import 'package:bookia_store_app/core/widgets/nav_bar_widget.dart';
 import 'package:bookia_store_app/feature/auth/data/models/request/login_params.dart';
 import 'package:bookia_store_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:bookia_store_app/feature/auth/presentation/bloc/auth_event.dart';
 import 'package:bookia_store_app/feature/auth/presentation/bloc/auth_state.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/register_view.dart';
 import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
 import 'package:bookia_store_app/feature/auth/presentation/widgets/social_btn_card.dart';
 import 'package:bookia_store_app/core/widgets/text_form_field_widget.dart';
@@ -27,43 +28,32 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool isObscure = false;
+  bool isObscure = true;
   var formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
-      if (state is LoginSuccessState) {
-        pushReplacement(context, const NavBarWidget());
-      } else if (state is LoginErrorState) {
-        showErrorDialog(context, state.error);
-      }
-    }, builder: (context, state) {
-      return Scaffold(
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is LoginSuccessState) {
+          Navigator.pop(context);
+
+          pushAndRemoveUntil(context, const NavBarWidget());
+        } else if (state is LoginErrorState) {
+          Navigator.pop(context);
+
+          showErrorDialog(context, state.error);
+        } else if (state is LoginLoadingState) {
+          showLoadingDialog(context);
+        }
+      },
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  width: 41,
-                  height: 41,
-                  //margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.only(right: 3),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.whiteColor,
-                    border: Border.all(
-                      color: AppColors.borderColor,
-                    ),
-                  ),
-                  child: const Icon(Icons.arrow_back_ios_new_rounded),
-                ),
-              )
-            ],
+          title: const Row(
+            children: [BackCardWidget()],
           ),
         ),
         body: Container(
@@ -92,6 +82,8 @@ class _LoginViewState extends State<LoginView> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your Password';
+                    } else if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
                     }
                     return null;
                   },
@@ -129,11 +121,15 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const Gap(30),
                 CustomButton(
-                  text: 'Login',
-                  onPressed: () {
-                    pushAndRemoveUntil(context, const NavBarWidget());
-                  },
-                ),
+                    text: 'Login',
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(LoginEvent(LoginParams(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            )));
+                      }
+                    }),
                 const Gap(30),
                 const DividerView(
                   text: 'Or Login with',
@@ -148,15 +144,10 @@ class _LoginViewState extends State<LoginView> {
           text: 'Don’t have an account?',
           textButton: 'Sign Up',
           onpressed: () {
-            if (formKey.currentState!.validate()) {
-              context.read<AuthBloc>().add(LoginEvent(LoginParams(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  )));
-            }
+            pushReplacement(context, const RegisterView());
           },
         ),
-      );
-    });
+      ),
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:bookia_store_app/core/function/navigation.dart';
 import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
+import 'package:bookia_store_app/feature/auth/presentation/page/forgot_password.dart';
 import 'package:bookia_store_app/feature/auth/presentation/page/reset_password.dart';
 import 'package:bookia_store_app/feature/auth/presentation/widgets/bottom_info.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _OtpVerificationViewState extends State<OtpVerificationView> {
         title: Row(
           children: [
             GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => pushReplacement(context, const ForgotPasswordView()),
               child: Container(
                 width: 41,
                 height: 41,

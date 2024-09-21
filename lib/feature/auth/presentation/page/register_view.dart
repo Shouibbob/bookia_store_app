@@ -1,8 +1,8 @@
 import 'package:bookia_store_app/core/constants/assets_icons.dart';
 import 'package:bookia_store_app/core/function/dialogs.dart';
 import 'package:bookia_store_app/core/function/navigation.dart';
-import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
+import 'package:bookia_store_app/core/widgets/back_card_widget.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
 import 'package:bookia_store_app/core/widgets/nav_bar_widget.dart';
 import 'package:bookia_store_app/feature/auth/data/models/request/register_params.dart';
@@ -27,8 +27,8 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  bool isObscure = false;
-  bool isObscureConfirm = false;
+  bool isObscure = true;
+  bool isObscureConfirm = true;
   var formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
@@ -47,25 +47,9 @@ class _RegisterViewState extends State<RegisterView> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Row(
+          title: const Row(
             children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  width: 41,
-                  height: 41,
-                  //margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.only(right: 3),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.whiteColor,
-                    border: Border.all(
-                      color: AppColors.borderColor,
-                    ),
-                  ),
-                  child: const Icon(Icons.arrow_back_ios_new_rounded),
-                ),
-              )
+              BackCardWidget(),
             ],
           ),
         ),

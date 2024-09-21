@@ -14,3 +14,10 @@ class LoginEvent extends AuthEvent {
 
   LoginEvent(this.params);
 }
+
+class SendForgetPasswordEvent extends AuthEvent {
+  final String? email;
+  SendForgetPasswordEvent({this.email});
+}
+
+

@@ -23,3 +23,15 @@ class LoginErrorState extends AuthState {
   final String error;
   LoginErrorState(this.error);
 }
+
+
+// forget password
+
+class SendForgetPasswordLoadingState extends AuthState {}
+
+class SendForgetPasswordSuccessState extends AuthState {}
+
+class SendForgetPasswordErrorState extends AuthState {
+  final String error;
+  SendForgetPasswordErrorState(this.error);
+}

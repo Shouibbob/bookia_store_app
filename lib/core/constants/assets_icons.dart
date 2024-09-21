@@ -13,4 +13,5 @@ class AssetsIcons {
   static const String profileSvg = 'assets/icons/Profile.svg';
   static const String doneSvg = 'assets/icons/done.svg';
   static const String eyeSvg = 'assets/icons/eye.svg';
+  static const String logoutSvg = 'assets/icons/Logout.svg';
 }
