@@ -31,7 +31,7 @@ showLoadingDialog(BuildContext context) {
 
 showSuccessDialog(BuildContext context) {
   showDialog(
-      barrierDismissible: false,
+      barrierDismissible: true,
       context: context,
       builder: (context) {
         return Lottie.asset('assets/images/success.json');

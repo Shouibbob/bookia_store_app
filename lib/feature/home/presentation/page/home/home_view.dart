@@ -1,7 +1,9 @@
 import 'package:bookia_store_app/core/constants/assets_icons.dart';
+import 'package:bookia_store_app/core/function/navigation.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/feature/home/presentation/widgets/best_seller_widget.dart';
 import 'package:bookia_store_app/feature/home/presentation/widgets/home_banner.dart';
+import 'package:bookia_store_app/feature/search/presentation/page/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -31,7 +33,9 @@ class _HomeViewState extends State<HomeView> {
             icon: SvgPicture.asset(AssetsIcons.notificationSvg),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              push(context, const SearchView());
+            },
             icon: SvgPicture.asset(AssetsIcons.searchSvg),
           ),
         ],

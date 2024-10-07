@@ -8,20 +8,23 @@ class DioProvider {
   static init() {
     dio = Dio(BaseOptions(
       baseUrl: AppConstants.baseUrl,
-      //connectTimeout: const Duration(seconds: 30),
-      //receiveTimeout: const Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
     ));
   }
 
   // handle Dio method
 
   static Future<Response> get(
-      {required String endPoint, Map<String, dynamic>? headers}) {
+      {required String endPoint,
+      Map<String, dynamic>? headers,
+      Map<String, dynamic>? query}) {
     return dio.get(
       endPoint,
       options: Options(
         headers: headers,
       ),
+      queryParameters: query,
     );
   }
 

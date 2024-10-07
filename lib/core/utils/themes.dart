@@ -6,13 +6,14 @@ class AppTheme {
     fontFamily: 'DMSerifDisplay',
     scaffoldBackgroundColor: AppColors.whiteColor,
     appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.whiteColor,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textColor,
-        )),
+      backgroundColor: AppColors.whiteColor,
+      centerTitle: true,
+      // titleTextStyle: TextStyle(
+      //   fontSize: 18,
+      //   fontWeight: FontWeight.w500,
+      //   color: AppColors.textColor,
+      // ),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.whiteColor,
       elevation: 0,

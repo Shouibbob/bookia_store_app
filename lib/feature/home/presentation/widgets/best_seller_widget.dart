@@ -3,7 +3,7 @@ import 'package:bookia_store_app/core/utils/colors.dart';
 import 'package:bookia_store_app/core/utils/text_style.dart';
 import 'package:bookia_store_app/core/widgets/custom_button_widget.dart';
 import 'package:bookia_store_app/feature/home/presentation/bloc/home_bloc.dart';
-import 'package:bookia_store_app/feature/home/presentation/page/book_details_view.dart';
+import 'package:bookia_store_app/feature/home/presentation/page/bookdetails/book_details_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
